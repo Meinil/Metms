@@ -1,0 +1,10 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3308/test?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+mybatis:
+    mapper-locations: classpath:com/meinil/metms/server/mapper/*.xml # sql映射文件位置
+    configuration:
+        map-underscore-to-camel-case: true # 开启驼峰命名映射
