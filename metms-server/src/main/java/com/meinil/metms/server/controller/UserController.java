@@ -2,10 +2,11 @@ package com.meinil.metms.server.controller;
 
 import com.meinil.metms.commons.Path;
 import com.meinil.metms.commons.Result;
-import com.meinil.metms.server.model.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.meinil.metms.commons.User;
+import com.meinil.metms.server.annotation.PassToken;
+import com.meinil.metms.server.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author Meinil
@@ -13,10 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class UserController {
-    @PostMapping(Path.Login)
+    @Autowired
+    private UserService userService;
+
+    @PostMapping(Path.LOGIN)
     public Result login(@RequestBody User user) {
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        return new Result();
+        return userService.login(user);
+    }
+
+    @PassToken(value = 0)
+    @GetMapping(Path.USER_COUNT + "/{page}")
+    public Result getUserCount(@PathVariable("page") int page) {
+        return userService.getPage(page);
     }
 }

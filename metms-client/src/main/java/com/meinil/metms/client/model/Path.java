@@ -1,4 +1,4 @@
-package com.meinil.metms.commons;
+package com.meinil.metms.client.model;
 
 /**
  * @Author Meinil

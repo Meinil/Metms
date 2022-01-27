@@ -11,7 +11,5 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface View {
-    String path();
-    Class<?> controller() default View.class;
+public @interface FXInit {
 }

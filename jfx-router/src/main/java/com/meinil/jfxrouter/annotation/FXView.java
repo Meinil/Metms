@@ -9,9 +9,7 @@ import java.lang.annotation.Target;
  * @Author Meinil
  * @Version 1.0
  */
-@Target({ElementType.METHOD})
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface View {
-    String path();
-    Class<?> controller() default View.class;
+public @interface FXView {
 }

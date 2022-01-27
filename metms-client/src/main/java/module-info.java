@@ -4,9 +4,12 @@ module metms.client {
     requires fastjson;
 
     requires com.jfxrouter;
-    requires metms.commons;
+
+    opens com.meinil.metms.client.controller to com.jfxrouter;
+    opens com.meinil.metms.client.model to fastjson;
 
     exports com.meinil.metms.client;
     exports com.meinil.metms.client.view;
     exports com.meinil.metms.client.component;
+    exports com.meinil.metms.client.model;
 }

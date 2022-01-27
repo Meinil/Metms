@@ -1,7 +1,9 @@
 package com.meinil.metms.client.request;
 
-import com.alibaba.fastjson.JSONObject;
-import com.meinil.metms.commons.Path;
+import com.alibaba.fastjson.JSON;
+import com.meinil.metms.client.component.PromptBox;
+import com.meinil.metms.client.config.CacheConfig;
+import com.meinil.metms.client.model.Result;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,18 +32,8 @@ public class Request {
      * @param path 请求路径
      * @return 请求对象
      */
-    public static HttpResponse<String> get(String path) {
-        try {
-            HttpRequest request = HttpRequest
-                    .newBuilder()
-                    .GET()
-                    .uri(new URI(baseUrl + path))
-                    .build();
-            return CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static Result get(String path) {
+        return request(path, null);
     }
 
     /**
@@ -50,15 +42,35 @@ public class Request {
      * @param params 请求参数
      * @return  请求对象
      */
-    public static HttpResponse<String> post(String path, JSONObject params) {
+    public static Result post(String path, Object params) {
+        return request(path, params);
+    }
+
+    private static Result request(String path, Object params) {
         try {
-            HttpRequest request = HttpRequest
-                    .newBuilder()
-                    .POST(HttpRequest.BodyPublishers.ofString(params.toJSONString()))
-                    .uri(new URI(baseUrl + path))
-                    .build();
-            return CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpRequest request = null;
+            if (params == null) {
+                request = HttpRequest
+                        .newBuilder()
+                        .headers("token", CacheConfig.get("token"))
+                        .GET()
+                        .uri(new URI(baseUrl + path))
+                        .build();
+            } else {
+                request = HttpRequest
+                        .newBuilder()
+                        .headers("token", CacheConfig.get("token"))
+                        .POST(HttpRequest.BodyPublishers.ofString(JSON.toJSONString(params)))
+                        .uri(new URI(baseUrl + path))
+                        .build();
+            }
+
+            return JSON.parseObject(
+                    CLIENT.send(request, HttpResponse.BodyHandlers.ofString()).body(),
+                    Result.class
+            );
         } catch (URISyntaxException | IOException | InterruptedException e) {
+            PromptBox.setShow("网络问题", PromptBox.ERROR);
             e.printStackTrace();
         }
         return null;

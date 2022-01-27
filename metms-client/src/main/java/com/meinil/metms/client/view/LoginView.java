@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 /**
  * @Author Meinil
@@ -26,16 +25,12 @@ public class LoginView {
     /**
      * 用户名输入框
      */
-    private TextField username;
+    private TextField account;
     /**
      * 密码输入框
      */
     private TextField password;
-    /**
-     * 登录控制器
-     */
-    private LoginController controller;
-    @View(path = "/login")
+    @View(path = "/login", controller = LoginController.class)
     public Node getView(RouterView routerView) {
         AnchorPane pane = new AnchorPane();
         pane.prefWidthProperty().bind(routerView.prefWidthProperty());
@@ -68,24 +63,22 @@ public class LoginView {
                false
         );
         ImageView logo = new ImageView(image2);
-        username = new TextField();
-        username.setPromptText("请输入用户名");
-        username.setMaxWidth(200);
-        username.setFocusTraversable(false);
+        account = new TextField("123456");
+        account.setPromptText("请输入用户名");
+        account.setMaxWidth(200);
+        account.setFocusTraversable(false);
         password = new PasswordField();
+        password.setText("123456");
         password.setPromptText("请输入密码");
         password.setMaxWidth(200);
         password.setFocusTraversable(false);
         loginBtn = new Button("登录");
         loginBtn.setPrefWidth(200);
-        right.getChildren().addAll(logo, username, password, loginBtn);
+        right.getChildren().addAll(logo, account, password, loginBtn);
 
         pane.getChildren().addAll(left, right);
         pane.setMinSize(600, 400);
         AnchorPane.setRightAnchor(right, 0.0);
-
-        controller = new LoginController(this);
-
         return pane;
    }
 
@@ -93,8 +86,8 @@ public class LoginView {
         return loginBtn;
     }
 
-    public TextField getUsername() {
-        return username;
+    public TextField getAccount() {
+        return account;
     }
 
     public TextField getPassword() {

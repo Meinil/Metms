@@ -13,12 +13,17 @@ public class Route {
     /**
      * 路由路径
      */
-    private final String path;
+    private String path;
 
     /**
      * 组件类
      */
-    private final Class<?> clazz;
+    private final Class<?> nodeClazz;
+
+    /**
+     * 控制器类
+     */
+    private Class<?> controllerClazz;
 
     /**
      * !!!子路由, 不要使用, 未完成!!!
@@ -30,17 +35,17 @@ public class Route {
      */
     private final boolean cache;
 
-    public Route(Class<?> clazz) {
-        this(clazz, null);
+    public Route(Class<?> nodeClazz) {
+        this(nodeClazz, null);
     }
 
-    public Route(Class<?> clazz, Route children) {
-        this(clazz, children, true);
+    public Route(Class<?> nodeClazz, Route children) {
+        this(nodeClazz, children, true);
     }
 
-    public Route(Class<?> clazz, Route children, boolean cache) {
-        this.path = computePath(clazz);
-        this.clazz = clazz;
+    public Route(Class<?> nodeClazz, Route children, boolean cache) {
+        computePath(nodeClazz);
+        this.nodeClazz = nodeClazz;
         this.children = children;
         this.cache = cache;
     }
@@ -49,8 +54,12 @@ public class Route {
         return path;
     }
 
-    public Class<?> getClazz() {
-        return clazz;
+    public Class<?> getNodeClazz() {
+        return nodeClazz;
+    }
+
+    public Class<?> getControllerClazz() {
+        return controllerClazz;
     }
 
     public Route getChildren() {
@@ -61,12 +70,14 @@ public class Route {
         return cache;
     }
 
-    private static String computePath(Class<?> clazz) {
+    private void computePath(Class<?> clazz) {
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             View annotation = method.getAnnotation(View.class);
             if (annotation != null) {
-                return annotation.path();
+                path = annotation.path();                   // 路由路径
+                controllerClazz = annotation.controller();  // 控制器
+                return;
             }
         }
         throw new RuntimeException(String.format("请在%s的某一方法上加上@View注解", clazz.getName()));
@@ -80,11 +91,11 @@ public class Route {
         if (!(o instanceof Route route)) {
             return false;
         }
-        return isCache() == route.isCache() && Objects.equals(getPath(), route.getPath()) && Objects.equals(getClazz(), route.getClazz()) && Objects.equals(getChildren(), route.getChildren());
+        return isCache() == route.isCache() && Objects.equals(getPath(), route.getPath()) && Objects.equals(getNodeClazz(), route.getNodeClazz()) && Objects.equals(getChildren(), route.getChildren());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPath(), getClazz(), getChildren(), isCache());
+        return Objects.hash(getPath(), getNodeClazz(), getChildren(), isCache());
     }
 }

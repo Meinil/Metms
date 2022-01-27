@@ -1,4 +1,4 @@
-package com.meinil.metms.commons;
+package com.meinil.metms.client.model;
 
 /**
  * @Author Meinil
@@ -56,6 +56,10 @@ public class Result {
         this.data.put(key, data);
     }
     public <T> T get(String key, Class<T> clazz) {
+        Object o = data.get(key);
+        if (o instanceof JSONObject) {
+            return (T) ((JSONObject) o).get(key, clazz);
+        }
         return (T)data.get(key);
     }
 

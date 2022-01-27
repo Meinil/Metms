@@ -21,8 +21,8 @@ public class MyFastJsonConfig {
         config.setDateFormat("yyyy-MM-dd");
         config.setCharset(Charset.forName("UTF-8"));
         config.setSerializerFeatures(
-                //输出类名
-                SerializerFeature.WriteClassName,
+//                //输出类名
+//                SerializerFeature.WriteClassName,
                 //输出map中value为null的数据
                 SerializerFeature.WriteMapNullValue,
                 //json格式化

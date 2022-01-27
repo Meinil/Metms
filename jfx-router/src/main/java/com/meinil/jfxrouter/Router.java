@@ -1,9 +1,13 @@
 package com.meinil.jfxrouter;
 
+import com.meinil.jfxrouter.annotation.FXInit;
+import com.meinil.jfxrouter.annotation.FXRouter;
+import com.meinil.jfxrouter.annotation.FXView;
 import com.meinil.jfxrouter.annotation.View;
 import javafx.application.Platform;
 import javafx.scene.Node;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -21,6 +25,7 @@ public class Router {
      * Node 组件
      */
     private final Map<Route, Node> NODE_CACHE = new HashMap<>();
+    private final Map<Route, Object> CONTROLLER_CACHE = new HashMap<>();
 
     /**
      * 当前路由
@@ -120,14 +125,12 @@ public class Router {
             Platform.runLater(() -> {
                 // 清理原组件
                 routerView.getChildren().clear();
-
                 // 获取组件 优先获取缓存中的组件
                 Node node;
                 if (route.isCache()) {
                     node = NODE_CACHE.get(route);
                     if (node == null) {
                         node = getInstance(route, params);
-                        NODE_CACHE.put(route, node);
                     }
                 } else {
                     node = getInstance(route, params);
@@ -144,14 +147,34 @@ public class Router {
      * @return 组件实例
      */
     private Node getInstance(Route route, Object ...params) {
-        Class<?> clazz = route.getClazz();
+        Class<?> clazz = route.getNodeClazz();
         try {
-            return getView(clazz.getConstructor().newInstance(), params);
+            Object instance = clazz.getConstructor().newInstance();
+            Node node = getView(instance, params);
+            if (route.isCache()) {
+                // 缓存组件
+                NODE_CACHE.put(route, node);
+            }
+            // 为控制器注入Router     控制器只会生成一次，
+            if (!CONTROLLER_CACHE.containsKey(route)) {
+                Object controller = getController(route, instance);
+                if (controller != null) {
+                    CONTROLLER_CACHE.put(route, controller);
+                }
+            }
+            return node;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    /**
+     * 获取视图
+     * @param obj 视图对象
+     * @param params 视图的参数
+     * @return 视图
+     */
     private Node getView(Object obj, Object ...params) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, InstantiationException {
         Method[] methods = obj.getClass().getMethods();
         for (Method method : methods) {
@@ -168,6 +191,43 @@ public class Router {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取组件控制器
+     * @return 控制器
+     */
+    private Object getController(Route route, Object view) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Class<?> clazz = route.getControllerClazz();
+        if(clazz.equals(View.class)){
+            return null;
+        }
+        Object instance = clazz.getConstructor().newInstance();
+        // 注入Router和视图对象
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            FXRouter a1 = field.getAnnotation(FXRouter.class);
+            if (a1 != null) {
+                field.setAccessible(true);
+                field.set(instance, this);
+            } else {
+                FXView a2 = field.getAnnotation(FXView.class);
+                if (a2 != null) {
+                    field.setAccessible(true);
+                    field.set(instance, view);
+                }
+            }
+        }
+
+        // 调用初始化方法
+        Method[] methods = clazz.getMethods();
+        for(Method method : methods) {
+            FXInit annotation = method.getAnnotation(FXInit.class);
+            if (annotation != null) {
+                method.invoke(instance);
+            }
+        }
+        return instance;
     }
 
     /**
