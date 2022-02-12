@@ -1,0 +1,25 @@
+.mx-toggle {
+    -base-color: #409EFF;
+    -fx-background-color: -base-color;
+    -fx-text-fill: -base-color;
+    -fx-pref-height: 50;
+}
+.mx-toggle Region {
+    -fx-pref-width: 23;
+    -fx-pref-height: 23;
+    -fx-background-color: -base-color;
+}
+.mx-toggle .toggle-button {
+    -fx-padding: 8;
+    -fx-background-radius: 20;
+    -fx-border-radius: 5;
+    -fx-background-color: #FFF0;
+}
+.mx-toggle .toggle-button:selected,
+.mx-toggle .toggle-button:selected Region{
+    -fx-background-color: -base-color;
+    -fx-text-fill: WHITE;
+}
+.mx-toggle .toggle-button:hover {
+    -fx-background-color: #0004;
+}

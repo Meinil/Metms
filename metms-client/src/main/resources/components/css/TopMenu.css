@@ -1,0 +1,30 @@
+.top-menu {
+    -base-color: #409EFF;
+    -fx-background-color: -base-color;
+}
+.top-menu .toggle-button {
+    -fx-background-color: -base-color;
+}
+
+.top-menu .top-menu-min Region{
+    -fx-background-color: WHITE;
+    -fx-shape: "M512 1024C229.233 1024 0 794.767 0 512S229.233 0 512 0s512 229.233 512 512-229.233 512-512 512zM256 534.18a42.598 42.598 0 0 0 42.762 42.68h426.476A42.721 42.721 0 0 0 768 534.18a42.598 42.598 0 0 0-42.762-42.66H298.762A42.721 42.721 0 0 0 256 534.18z";
+}
+.top-menu .top-menu-close Region{
+    -fx-background-color: WHITE;
+    -fx-shape: "M512.001 15.678C237.414 15.678 14.82 238.273 14.82 512.86S237.414 1010.04 512 1010.04s497.18-222.593 497.18-497.18S786.589 15.678 512.002 15.678z m213.211 645.937c17.798 17.803 17.798 46.657 0 64.456-17.798 17.797-46.658 17.797-64.456 0L512.001 577.315 363.241 726.07c-17.799 17.797-46.652 17.797-64.45 0-17.804-17.799-17.804-46.653 0-64.456L447.545 512.86 298.79 364.104c-17.803-17.798-17.803-46.657 0-64.455 17.799-17.798 46.652-17.798 64.45 0l148.761 148.755 148.755-148.755c17.798-17.798 46.658-17.798 64.456 0 17.798 17.798 17.798 46.657 0 64.455L576.456 512.86l148.756 148.755z m0 0";
+}
+
+.top-menu .top-menu-min:selected Region,
+.top-menu .top-menu-close:selected Region{
+    -fx-background-color: WHITE;
+}
+
+.top-menu .top-menu-toggle-pane .toggle-button{
+    -fx-font-size: 15;
+    -fx-text-fill: WHITE;
+}
+.top-menu .top-menu-toggle-pane .toggle-button:selected{
+    -fx-background-color: WHITE;
+    -fx-text-fill: -base-color;
+}

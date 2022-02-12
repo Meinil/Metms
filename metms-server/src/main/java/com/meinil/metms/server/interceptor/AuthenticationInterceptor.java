@@ -2,7 +2,7 @@ package com.meinil.metms.server.interceptor;
 
 import com.auth0.jwt.exceptions.*;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.meinil.metms.commons.Result;
+import com.meinil.metms.server.utils.Result;
 import com.meinil.metms.server.annotation.PassToken;
 import com.meinil.metms.server.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,10 +55,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             }
         }
 
-        //如果没有异常，就放行
+        //如果有异常，阻止执行
         if(result.getMessage() != null) {
             //转为json，发回给前端
-            result.setCode(401);
+            result.setCode(400);
             response.setContentType("application/json;charset=utf-8");
             PrintWriter writer = response.getWriter();
             writer.println(result);

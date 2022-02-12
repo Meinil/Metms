@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meinil.metms.client.controller.teacher.ReleasePlanController">
+   <children>
+      <HBox spacing="50.0">
+         <children>
+            <HBox prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label fx:id="name" prefWidth="100.0" text="导师课名称：" />
+                  <TextField prefWidth="200.0" text="浓浓书香伴我成长" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label prefWidth="100.0" text="导师课地点：" />
+                  <TextField fx:id="position" prefWidth="200.0" text="图书馆" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="105.0" right="105.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="20.0" spacing="50.0">
+         <children>
+            <HBox prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label prefWidth="100.0" text="开始时间：" />
+                  <DatePicker fx:id="startTime" prefWidth="200.0" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label prefWidth="100.0" text="结束时间：" />
+                  <DatePicker fx:id="endTime" prefWidth="200.0" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="105.0" right="105.0" />
+         </padding>
+      </HBox>
+      <VBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Label text="主体内容(150-500)" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="content" maxWidth="700.0" prefHeight="371.0" prefWidth="700.0" />
+            <Button fx:id="submitBtn" mnemonicParsing="false" onMouseReleased="#onSubmitAction" prefHeight="23.0" prefWidth="100.0" text="提交" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

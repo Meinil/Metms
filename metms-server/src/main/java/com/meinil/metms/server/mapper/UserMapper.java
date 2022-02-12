@@ -1,6 +1,6 @@
 package com.meinil.metms.server.mapper;
 
-import com.meinil.metms.commons.User;
+import com.meinil.metms.server.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

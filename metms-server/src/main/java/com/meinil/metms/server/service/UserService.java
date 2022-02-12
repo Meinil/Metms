@@ -1,8 +1,8 @@
 package com.meinil.metms.server.service;
 
-import com.meinil.metms.commons.Result;
+import com.meinil.metms.server.utils.Result;
 import com.meinil.metms.server.mapper.UserMapper;
-import com.meinil.metms.commons.User;
+import com.meinil.metms.server.model.User;
 import com.meinil.metms.server.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +37,10 @@ public class UserService {
         Result result = new Result();
         result.setCode(200);
         result.setMessage("ok");
-        if (page == 0) {
+        if (page == 1) {
             result.put("total", userMapper.getTotalCount());
-        } else {
-            result.put("users", userMapper.getUsers((page - 1) * 10));
         }
+        result.put("users", userMapper.getUsers((page - 1) * 10));
         return result;
     }
 }

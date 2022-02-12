@@ -1,77 +1,72 @@
 package com.meinil.metms.client.model;
 
-import com.meinil.metms.client.config.CacheSave;
-
-import java.util.Properties;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * @Author Meinil
  * @Version 1.0
  */
-public class User implements CacheSave {
+public class User {
     private String id;
-    /**
-     * 用户名
-     */
-    private String username;
-    /**
-     * 账号
-     */
-    private String account;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 权限
-     */
-    private Integer power;
-
-    public String getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Integer getPower() {
-        return power;
-    }
+    private SimpleStringProperty account = new SimpleStringProperty();
+    private SimpleStringProperty password = new SimpleStringProperty();
+    private SimpleStringProperty username = new SimpleStringProperty();
+    private SimpleIntegerProperty power = new SimpleIntegerProperty();
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setAccount(String account) {
-        this.account = account;
+        this.account.set(account);
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password.set(password);
     }
 
-    public void setPower(Integer power) {
-        this.power = power;
+    public void setUsername(String username) {
+        this.username.set(username);
     }
 
-    @Override
-    public void save(Properties properties) {
-        properties.setProperty("id", id);
-        properties.setProperty("username", username);
-        properties.setProperty("account", account);
-        properties.setProperty("power", String.valueOf(power));
+    public void setPower(int power) {
+        this.power.set(power);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getAccount() {
+        return account.get();
+    }
+
+    public SimpleStringProperty accountProperty() {
+        return account;
+    }
+
+    public String getPassword() {
+        return password.get();
+    }
+
+    public SimpleStringProperty passwordProperty() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username.get();
+    }
+
+    public SimpleStringProperty usernameProperty() {
+        return username;
+    }
+
+    public int getPower() {
+        return power.get();
+    }
+
+    public SimpleIntegerProperty powerProperty() {
+        return power;
     }
 }

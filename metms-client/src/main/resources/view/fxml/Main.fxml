@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mainPane" style="-fx-background-color: #FFF0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.53), 10, 0, 0, 0);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meinil.metms.client.controller.MainController">
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="main">
+         <children>
+            <ImageView fx:id="loading" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="260.0">
+               <image>
+                  <Image url="@../img/loading.gif" />
+               </image>
+            </ImageView>
+            <fx:include fx:id="topMenuPane" source="../../components/fxml/TopMenu.fxml" />
+            <AnchorPane fx:id="contentPane" layoutX="310.0" layoutY="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+            <HBox fx:id="promptBox" alignment="CENTER" prefHeight="40.0" prefWidth="300.0" spacing="10.0" styleClass="prompt-box" translateY="-55.0" AnchorPane.leftAnchor="300.0">
+               <children>
+                  <Region id="icon" />
+                  <Text id="text" strokeType="OUTSIDE" strokeWidth="0.0" text="提示性文本" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@../css/Main.css" />
+   </stylesheets>
+</BorderPane>

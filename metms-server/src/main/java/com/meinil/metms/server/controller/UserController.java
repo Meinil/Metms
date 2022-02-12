@@ -1,8 +1,9 @@
 package com.meinil.metms.server.controller;
 
-import com.meinil.metms.commons.Path;
-import com.meinil.metms.commons.Result;
-import com.meinil.metms.commons.User;
+import com.meinil.metms.server.model.Plan;
+import com.meinil.metms.server.service.PlanService;
+import com.meinil.metms.server.utils.Result;
+import com.meinil.metms.server.model.User;
 import com.meinil.metms.server.annotation.PassToken;
 import com.meinil.metms.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,23 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private PlanService planService;
 
-    @PostMapping(Path.LOGIN)
+    @PostMapping("/login")
     public Result login(@RequestBody User user) {
         return userService.login(user);
     }
 
     @PassToken(value = 0)
-    @GetMapping(Path.USER_COUNT + "/{page}")
+    @GetMapping(  "/admin/page/{page}")
     public Result getUserCount(@PathVariable("page") int page) {
         return userService.getPage(page);
+    }
+
+    @PassToken(value = 2)
+    @PostMapping(  "/teacher/plan")
+    public Result releasePlan(@RequestBody Plan plan) {
+        return planService.insertPlan(plan);
     }
 }
