@@ -21,7 +21,7 @@
             </ImageView>
             <fx:include fx:id="topMenuPane" source="../../components/fxml/TopMenu.fxml" />
             <AnchorPane fx:id="contentPane" layoutX="310.0" layoutY="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-            <HBox fx:id="promptBox" alignment="CENTER" prefHeight="40.0" prefWidth="300.0" spacing="10.0" styleClass="prompt-box" translateY="-55.0" AnchorPane.leftAnchor="300.0">
+            <HBox fx:id="promptBox" alignment="CENTER" prefHeight="40.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: WHITE;" styleClass="prompt-box" translateY="-55.0" AnchorPane.leftAnchor="300.0">
                <children>
                   <Region id="icon" />
                   <Text id="text" strokeType="OUTSIDE" strokeWidth="0.0" text="提示性文本" />

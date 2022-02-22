@@ -33,7 +33,7 @@
                         <CheckBox mnemonicParsing="false" text="记住我" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onMouseReleased="#onLoginAction" prefHeight="22.0" prefWidth="200.0" text="Button" />
+                  <Button mnemonicParsing="false" onMouseReleased="#onLoginAction" prefHeight="22.0" prefWidth="200.0" text="登录" />
                </children>
             </VBox>
             <ImageView fx:id="loading" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="260.0">

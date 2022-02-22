@@ -16,8 +16,8 @@
          <children>
             <HBox prefWidth="320.0" spacing="10.0">
                <children>
-                  <Label fx:id="name" prefWidth="100.0" text="导师课名称：" />
-                  <TextField prefWidth="200.0" text="浓浓书香伴我成长" />
+                  <Label prefWidth="100.0" text="导师课名称：" />
+                  <TextField fx:id="name" prefWidth="200.0" promptText="本次课程标题" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -26,7 +26,7 @@
             <HBox layoutX="10.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                <children>
                   <Label prefWidth="100.0" text="导师课地点：" />
-                  <TextField fx:id="position" prefWidth="200.0" text="图书馆" />
+                  <TextField fx:id="position" prefWidth="200.0" promptText="本次课程地点" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -45,7 +45,7 @@
             <HBox prefWidth="320.0" spacing="10.0">
                <children>
                   <Label prefWidth="100.0" text="开始时间：" />
-                  <DatePicker fx:id="startTime" prefWidth="200.0" />
+                  <DatePicker fx:id="startTime" editable="false" prefWidth="200.0" promptText="本次课程开始时间" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -54,7 +54,7 @@
             <HBox layoutX="10.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                <children>
                   <Label prefWidth="100.0" text="结束时间：" />
-                  <DatePicker fx:id="endTime" prefWidth="200.0" />
+                  <DatePicker fx:id="endTime" editable="false" prefWidth="200.0" promptText="本次课程结束时间" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -75,7 +75,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="content" maxWidth="700.0" prefHeight="371.0" prefWidth="700.0" />
+            <TextArea fx:id="content" maxWidth="700.0" prefHeight="371.0" prefWidth="700.0" promptText="请填写本次课程内容" wrapText="true" />
             <Button fx:id="submitBtn" mnemonicParsing="false" onMouseReleased="#onSubmitAction" prefHeight="23.0" prefWidth="100.0" text="提交" />
          </children>
       </VBox>

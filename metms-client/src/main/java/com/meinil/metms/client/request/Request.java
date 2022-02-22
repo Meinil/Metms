@@ -71,7 +71,7 @@ public class Request {
     private static void request(String path, Object params, Consumer<HashMap<String, Object>> consumer) {
         try {
             HttpRequest request;
-            if (params == null) {
+            if (params != null) {
                 request = HttpRequest
                         .newBuilder()
                         .uri(new URI(baseURL + path))

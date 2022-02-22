@@ -1,7 +1,5 @@
 package com.meinil.metms.server.controller;
 
-import com.meinil.metms.server.model.Plan;
-import com.meinil.metms.server.service.PlanService;
 import com.meinil.metms.server.utils.Result;
 import com.meinil.metms.server.model.User;
 import com.meinil.metms.server.annotation.PassToken;
@@ -14,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
  * @Version 1.0
  */
 @RestController
-public class UserController {
+public class AdminController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private PlanService planService;
+
 
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
@@ -29,11 +26,5 @@ public class UserController {
     @GetMapping(  "/admin/page/{page}")
     public Result getUserCount(@PathVariable("page") int page) {
         return userService.getPage(page);
-    }
-
-    @PassToken(value = 2)
-    @PostMapping(  "/teacher/plan")
-    public Result releasePlan(@RequestBody Plan plan) {
-        return planService.insertPlan(plan);
     }
 }

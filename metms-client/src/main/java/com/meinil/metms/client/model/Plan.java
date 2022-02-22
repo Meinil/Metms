@@ -4,7 +4,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * @Author Meinil
@@ -17,8 +16,13 @@ public class Plan {
     private SimpleObjectProperty<LocalDate> startTime = new SimpleObjectProperty<>();
     private SimpleObjectProperty<LocalDate> endTime = new SimpleObjectProperty<>();
     private SimpleStringProperty content = new SimpleStringProperty();
+    private String teacherId;
 
     public Plan() {
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
     public void setId(String id) {
@@ -45,6 +49,10 @@ public class Plan {
         this.content.set(content);
     }
 
+    public String getTeacherId() {
+        return teacherId;
+    }
+
     public String getId() {
         return id;
     }
@@ -65,8 +73,16 @@ public class Plan {
         return position;
     }
 
+    public LocalDate getStartTime() {
+        return startTime.get();
+    }
+
     public SimpleObjectProperty<LocalDate> startTimeProperty() {
         return startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime.get();
     }
 
     public SimpleObjectProperty<LocalDate> endTimeProperty() {

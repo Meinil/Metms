@@ -6,18 +6,39 @@ package com.meinil.metms.client.utils;
  */
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
-import lombok.Data;
 
 import java.util.HashMap;
 import java.util.List;
 
 // 响应结果
-@Data
 public class Result {
     private int code;
     private String message;
     private HashMap<String, Object> data;
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setData(HashMap<String, Object> data) {
+        this.data = data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public HashMap<String, Object> getData() {
+        return data;
+    }
 
     public <T> T getValue(String key, Class<T> clazz) {
         Object obj = data.get(key);

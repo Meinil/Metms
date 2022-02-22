@@ -13,7 +13,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT id,account,username,power FROM tb_user WHERE account=#{account}&&password=#{password}")
+    @Select("SELECT id,account,username,power, description FROM tb_user WHERE account=#{account}&&password=#{password}")
     public User getUser(User user);
 
     @Select("SELECT COUNT(id) FROM tb_user")
@@ -21,4 +21,10 @@ public interface UserMapper {
 
     @Select("SELECT id, username, account, power FROM tb_user LIMIT #{id}, 10")
     public List<User> getUsers(int id);
+
+    @Select("SELECT account, username, description FROM tb_user WHERE account = (SELECT teacher_id FROM tb_connect WHERE stu_id=4)")
+    public User getUserByStudentAccount(String account);
+
+    @Select("SELECT username, account FROM tb_user WHERE account IN (SELECT stu_id FROM tb_connect WHERE teacher_id=#{account})")
+    public List<User> getStudents(String account);
 }

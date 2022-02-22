@@ -1,8 +1,12 @@
 package com.meinil.metms.client.controller.teacher;
 
+import com.alibaba.fastjson.JSONObject;
+import com.meinil.metms.client.animation.Loading;
 import com.meinil.metms.client.animation.PromptBox;
 import com.meinil.metms.client.model.Plan;
+import com.meinil.metms.client.model.User;
 import com.meinil.metms.client.request.Request;
+import com.meinil.metms.client.utils.Config;
 import com.meinil.metms.client.utils.UUIDUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +28,7 @@ public class ReleasePlanController {
     @FXML
     private DatePicker endTime;
     @FXML
-    private Label name;
+    private TextField name;
     @FXML
     private TextField position;
     @FXML
@@ -36,9 +40,10 @@ public class ReleasePlanController {
         plan = new Plan();
         plan.nameProperty().bind(name.textProperty());
         plan.positionProperty().bind(position.textProperty());
-        plan.contentProperty().bind(plan.contentProperty());
-//        plan.startTimeProperty().bind(startTime.valueProperty());
-//        plan.endTimeProperty().bind(endTime.valueProperty());
+        plan.contentProperty().bind(content.textProperty());
+        plan.startTimeProperty().bind(startTime.valueProperty());
+        plan.endTimeProperty().bind(endTime.valueProperty());
+        plan.setTeacherId(((User)Config.get("user")).getId());
     }
 
     @FXML

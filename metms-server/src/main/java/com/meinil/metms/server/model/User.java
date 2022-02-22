@@ -28,6 +28,11 @@ public class User {
      */
     private Integer power;
 
+    /**
+     * 用户描述
+     */
+    private String description;
+
     public User(String id, String username, String account, Integer power) {
         this.id = id;
         this.username = username;

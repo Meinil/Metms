@@ -13,6 +13,10 @@ public class User {
     private SimpleStringProperty password = new SimpleStringProperty();
     private SimpleStringProperty username = new SimpleStringProperty();
     private SimpleIntegerProperty power = new SimpleIntegerProperty();
+    /**
+     * 用户描述
+     */
+    private String description;
 
     public void setId(String id) {
         this.id = id;
@@ -32,6 +36,10 @@ public class User {
 
     public void setPower(int power) {
         this.power.set(power);
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getId() {
@@ -68,5 +76,9 @@ public class User {
 
     public SimpleIntegerProperty powerProperty() {
         return power;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

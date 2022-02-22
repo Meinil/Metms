@@ -7,6 +7,8 @@ import com.meinil.metms.server.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author Meinil
  * @Version 1.0
@@ -41,6 +43,27 @@ public class UserService {
             result.put("total", userMapper.getTotalCount());
         }
         result.put("users", userMapper.getUsers((page - 1) * 10));
+        return result;
+    }
+
+    public Result getUser(String account) {
+        User user = userMapper.getUserByStudentAccount(account);
+        Result result;
+        if (user == null) {
+            result = new Result(400);
+            result.setMessage("该用户暂无导师");
+        } else {
+            result = new Result(200);
+            result.put("mentor", user);
+            result.setMessage("ok");
+        }
+        return result;
+    }
+
+    public Result getAllStudent(String account) {
+        List<User> students = userMapper.getStudents(account);
+        Result result = new Result(200);
+        result.put("students", students);
         return result;
     }
 }

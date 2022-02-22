@@ -24,6 +24,9 @@ public class Result {
         this.message = message;
         this.data = data;
     }
+    public Result(int code) {
+        this.code = code;
+    }
 
     public void setCode(int code) {
         this.code = code;
