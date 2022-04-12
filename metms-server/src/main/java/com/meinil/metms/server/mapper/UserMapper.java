@@ -1,7 +1,9 @@
 package com.meinil.metms.server.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.meinil.metms.server.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -10,9 +12,7 @@ import java.util.List;
  * @Author Meinil
  * @Version 1.0
  */
-
-@Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     @Select("SELECT id,account,username,power, description FROM tb_user WHERE account=#{account}&&password=#{password}")
     public User getUser(User user);
 
@@ -27,4 +27,6 @@ public interface UserMapper {
 
     @Select("SELECT username, account FROM tb_user WHERE account IN (SELECT stu_id FROM tb_connect WHERE teacher_id=#{account})")
     public List<User> getStudents(String account);
+
+    public boolean updateTeacher( @Param("teacherId") String teacherId, @Param("stuId") String stuId);
 }

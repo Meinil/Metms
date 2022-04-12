@@ -15,6 +15,7 @@
           <TableColumn fx:id="tcTitle" prefWidth="75.0" text="导师课名称" />
           <TableColumn fx:id="tcStudent" prefWidth="75.0" text="学生" />
             <TableColumn fx:id="tcCreateTime" prefWidth="75.0" text="提交日期" />
+            <TableColumn fx:id="tcLevel" prefWidth="75.0" text="等级" />
             <TableColumn fx:id="tcApprove" prefWidth="75.0" text="批改" />
         </columns>
          <columnResizePolicy>

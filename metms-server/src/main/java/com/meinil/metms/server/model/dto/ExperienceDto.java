@@ -31,7 +31,15 @@ public class ExperienceDto {
      */
     private LocalDate createdTime;
     /**
+     * 心得内容
+     */
+    private String content;
+    /**
      * 批改内容
      */
     private String correct;
+    /**
+     * 批改等级
+     */
+    private Character level;
 }

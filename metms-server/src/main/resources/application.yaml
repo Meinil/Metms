@@ -4,10 +4,10 @@ spring:
         url: jdbc:mysql://localhost:3306/metms?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&allowPublicKeyRetrieval=true
         username: root
         password: 123456
-mybatis:
+
+mybatis-plus:
     mapper-locations: classpath:com/meinil/metms/server/mapper/*.xml # sql映射文件位置
     configuration:
-        map-underscore-to-camel-case: true # 开启驼峰命名映射
         log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 token-secret: hahahah

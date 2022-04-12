@@ -23,7 +23,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     private TokenUtils utils;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler
+    ) throws Exception {
         HandlerMethod method = (HandlerMethod) handler;
         PassToken methodAnnotation = method.getMethodAnnotation(PassToken.class);
         if (methodAnnotation == null) {     // 不需要验证

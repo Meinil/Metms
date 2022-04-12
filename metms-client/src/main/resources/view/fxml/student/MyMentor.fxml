@@ -12,12 +12,12 @@
 
 <HBox alignment="CENTER_LEFT" prefHeight="550.0" prefWidth="900.0" styleClass="main" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.meinil.metms.client.controller.student.MyMentorController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="333.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/teacher.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="300.0" spacing="10.0" styleClass="profile">
+      <VBox alignment="CENTER_LEFT" prefHeight="550.0" prefWidth="459.0" spacing="10.0" styleClass="profile">
          <children>
             <HBox spacing="10.0">
                <children>
@@ -44,7 +44,7 @@
       </VBox>
       <VBox prefHeight="550.0" prefWidth="353.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" text="更换导师" />
+            <Button mnemonicParsing="false" onMouseClicked="#OnReplaceTeacher" text="更换导师" />
             <Button mnemonicParsing="false" text="联系导师" />
          </children>
          <padding>

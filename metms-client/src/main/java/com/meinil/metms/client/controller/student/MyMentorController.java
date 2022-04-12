@@ -5,7 +5,14 @@ import com.meinil.metms.client.model.User;
 import com.meinil.metms.client.request.Request;
 import com.meinil.metms.client.utils.Config;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * @Author Meinil
@@ -28,5 +35,17 @@ public class MyMentorController {
             nameText.setText(mentor.getUsername());
             descriptionText.setText(mentor.getDescription());
         });
+    }
+
+    @FXML
+    public void OnReplaceTeacher(MouseEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/components/fxml/UpdateTeacher.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

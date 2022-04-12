@@ -4,6 +4,7 @@ import com.meinil.metms.server.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.DigestUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,11 @@ class MetmsServerApplicationTests {
     private UserMapper userMapper;
 
     public static void main(String[] args) {
+    }
+
+    @Test
+    public void test() {
+        String s = DigestUtils.md5DigestAsHex("123456".getBytes());
     }
 
     @Test

@@ -1,5 +1,8 @@
 package com.meinil.metms.server.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +12,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@TableName("tb_user")
 public class User {
+    @TableId(type = IdType.ASSIGN_ID)
     private String id;
     /**
      * 用户名

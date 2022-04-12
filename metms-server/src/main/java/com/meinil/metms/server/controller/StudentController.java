@@ -2,9 +2,9 @@ package com.meinil.metms.server.controller;
 
 import com.meinil.metms.server.annotation.PassToken;
 import com.meinil.metms.server.model.Experience;
-import com.meinil.metms.server.service.ExperienceService;
-import com.meinil.metms.server.service.PlanService;
-import com.meinil.metms.server.service.UserService;
+import com.meinil.metms.server.service.impl.ExperienceServiceImpl;
+import com.meinil.metms.server.service.impl.PlanServiceImpl;
+import com.meinil.metms.server.service.impl.UserServiceImpl;
 import com.meinil.metms.server.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +14,21 @@ import org.springframework.web.bind.annotation.*;
  * @Version 1.0
  */
 @RestController
+@RequestMapping("/student")
 public class StudentController {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @Autowired
-    private PlanService planService;
+    private PlanServiceImpl planServiceImpl;
 
     @Autowired
-    private ExperienceService experienceService;
+    private ExperienceServiceImpl experienceServiceImpl;
 
     @PassToken(value = 3)
-    @GetMapping("/student/teacher/{account}")
+    @GetMapping("/teacher/{account}")
     public Result getUser(@PathVariable String account) {
-        return userService.getUser(account);
+        return userServiceImpl.getUser(account);
     }
 
     /**
@@ -35,14 +36,40 @@ public class StudentController {
      * @param id 学生的id
      */
     @PassToken(value = 3)
-    @GetMapping("/student/plan/{id}")
+    @GetMapping("/plan/{id}")
     public Result getPlan(@PathVariable String id) {
-        return planService.getPlan(id);
+        return planServiceImpl.getPlan(id);
     }
 
     @PassToken(value = 3)
-    @PostMapping("/student/experience")
+    @PostMapping("/experience")
     public Result insertExperience(@RequestBody Experience experience) {
-        return experienceService.insertExperience(experience);
+        return experienceServiceImpl.insertExperience(experience);
+    }
+
+    @PassToken(value = 3)
+    @GetMapping("/teacherList")
+    public Result getAllTeacher() {
+        Result result = new Result();
+        result.setCode(200);
+        result.setMessage("请求成功");
+        result.put("teachers", userServiceImpl.getAllTeacher());
+        return result;
+    }
+
+    @PassToken(value = 3)
+    @GetMapping("/{teacherId}/{stuId}")
+    public Result updateTeacher(@PathVariable String teacherId,
+                                @PathVariable String stuId) {
+        boolean flag = userServiceImpl.updateTeacher(teacherId, stuId);
+        Result result = new Result();
+        if (flag) {
+            result.setCode(200);
+            result.setMessage("请求成功");
+        } else {
+            result.setCode(400);
+            result.setMessage("更新失败");
+        }
+        return result;
     }
 }

@@ -12,11 +12,9 @@ public class ExperienceDto {
     private String stuName;
     private boolean finished;
     private LocalDate createdTime;
+    private String content;
     private String correct;
-
-    public void setCorrect(String correct) {
-        this.correct = correct;
-    }
+    private String level;
 
     public void setId(String id) {
         this.id = id;
@@ -38,8 +36,16 @@ public class ExperienceDto {
         this.createdTime = createdTime;
     }
 
-    public String getCorrect() {
-        return correct;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCorrect(String correct) {
+        this.correct = correct;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getId() {
@@ -60,5 +66,17 @@ public class ExperienceDto {
 
     public LocalDate getCreatedTime() {
         return createdTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getCorrect() {
+        return correct;
+    }
+
+    public String getLevel() {
+        return level;
     }
 }
